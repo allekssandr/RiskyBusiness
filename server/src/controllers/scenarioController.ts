@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { v4 as uuidv4 } from 'uuid';
 import prisma from '../config/database';
 
 export const getScenarios = async (req: Request, res: Response, next: NextFunction) => {
@@ -16,14 +15,13 @@ export const getScenarios = async (req: Request, res: Response, next: NextFuncti
 
 export const createScenario = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, description, tone, isAdult } = req.body;
+    const { title, description, type, isAdult } = req.body;
 
     const scenario = await prisma.scenario.create({
       data: {
-        id: uuidv4(),
-        name,
+        title,
         description,
-        tone,
+        type: type.toUpperCase() as 'CLASSIC' | 'PARTY' | 'DEEP' | 'WILD',
         isAdult: isAdult || false,
       },
     });
