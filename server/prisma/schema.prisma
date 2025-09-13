@@ -1,0 +1,142 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?  @unique
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  hostedGames Game[] @relation("GameHost")
+  players     Player[]
+
+  @@map("users")
+}
+
+model Game {
+  id              String   @id @default(cuid())
+  hostId          String
+  scenarioId      String
+  status          GameStatus @default(WAITING)
+  currentPlayerId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  host    User     @relation("GameHost", fields: [hostId], references: [id])
+  scenario Scenario @relation(fields: [scenarioId], references: [id])
+  players Player[]
+  turns   Turn[]
+
+  @@map("games")
+}
+
+model Player {
+  id        String   @id @default(cuid())
+  gameId    String
+  userId    String
+  name      String
+  avatar    String?
+  order     Int
+  createdAt DateTime @default(now())
+
+  // Relations
+  game    Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  user    User          @relation(fields: [userId], references: [id])
+  profile PlayerProfile?
+  turns   Turn[]
+
+  @@map("players")
+}
+
+model PlayerProfile {
+  id          String   @id @default(cuid())
+  playerId    String   @unique
+  personality String
+  preferences String[]
+  createdAt   DateTime @default(now())
+
+  // Relations
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@map("player_profiles")
+}
+
+model Scenario {
+  id          String      @id @default(cuid())
+  name        String
+  description String
+  tone        ScenarioTone
+  isAdult     Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+
+  // Relations
+  games           Game[]
+  generatedItems  GeneratedItem[]
+
+  @@map("scenarios")
+}
+
+model GeneratedItem {
+  id              String      @id @default(cuid())
+  type            ItemType
+  content         String
+  scenarioId      String
+  playerProfileId String?
+  createdAt       DateTime    @default(now())
+
+  // Relations
+  scenario      Scenario      @relation(fields: [scenarioId], references: [id])
+  playerProfile PlayerProfile? @relation(fields: [playerProfileId], references: [id])
+  turns         Turn[]
+
+  @@map("generated_items")
+}
+
+model Turn {
+  id              String    @id @default(cuid())
+  gameId          String
+  playerId        String
+  generatedItemId String
+  choice          ItemType
+  result          String?
+  completedAt     DateTime?
+  createdAt       DateTime  @default(now())
+
+  // Relations
+  game          Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  player        Player        @relation(fields: [playerId], references: [id])
+  generatedItem GeneratedItem @relation(fields: [generatedItemId], references: [id])
+
+  @@map("turns")
+}
+
+enum GameStatus {
+  WAITING
+  ACTIVE
+  COMPLETED
+}
+
+enum ScenarioTone {
+  CLASSIC
+  PARTY
+  DEEP
+  WILD
+}
+
+enum ItemType {
+  TRUTH
+  DARE
+}

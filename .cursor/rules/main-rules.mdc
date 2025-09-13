@@ -1,0 +1,92 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+## Общие правила
+
+1. **Язык проекта:** TypeScript (строгий режим).
+2. **Стиль:**
+
+   * ESLint + Prettier (airbnb + prettier config).
+   * Не использовать `any`, только `unknown` при необходимости.
+   * Именование в camelCase, для компонентов — PascalCase.
+   * Папки и файлы — kebab-case.
+3. **Архитектура:**
+
+   * `/server` — backend (Node.js + Express + Prisma).
+   * `/mobile` — frontend (React Native + Expo).
+   * `/shared` (опционально) — общие типы, если будут нужны.
+
+---
+
+## Backend (/server)
+
+* **Фреймворк:** Express + Prisma ORM.
+* **Слои:**
+
+  * `routes/` — только маршруты, без логики.
+  * `controllers/` — бизнес-логика (каждый метод = отдельный контроллер).
+  * `services/` — работа с БД, LLM, кэшем.
+  * `middlewares/` — аутентификация, логгинг, валидация.
+* **БД:** PostgreSQL.
+* **Кэш:** Redis (для LLM и быстрых выборок).
+* **Файлы:** MinIO (mock, без сложных настроек на MVP).
+* **API:** REST, описывается через OpenAPI (Swagger).
+
+---
+
+## Mobile (/mobile)
+
+* **Фреймворк:** Expo + React Native + TypeScript.
+* **Стейт:** React Query (запросы и кэш API).
+* **Навигация:** React Navigation (stack).
+* **UI:** Figma → реализация в RN (карточки «стекляшки», полупрозрачность, blur).
+* **Архитектура:**
+
+  * `screens/` — экраны (каждый экран = отдельная папка).
+  * `components/` — переиспользуемые компоненты.
+  * `api/` — вызовы к backend (генерируем из OpenAPI).
+  * `hooks/` — кастомные хуки.
+* **Флоу:**
+
+  * Home → AddPlayers → ScenarioSelect → GameScreen.
+* **Fallback:** локальный JSON с вопросами/действиями.
+
+---
+
+## Правила кода
+
+1. **Никаких магических строк.** Все типы и константы в `/constants` или `/types`.
+2. **Валидация входных данных:** Zod.
+3. **Асинхронность:** `async/await`, без `.then()`.
+4. **Тесты:** Jest (минимум smoke-тесты для server API).
+5. **LLM:** через сервисный слой `LLMAdapter`. Если API недоступно → fallback.
+6. **Без хардкода:** все env в `.env`.
+7. **Контент:** фильтрация запрещённых слов на backend.
+
+---
+
+## Git & CI
+
+* Основная ветка: `main`.
+* Для фич: `feature/<название>`.
+* PR — обязательно линтинг и тесты.
+* CI: GitHub Actions → линтинг + build.
+* Deployment: Docker Compose (backend + db + redis).
+
+---
+
+## UI правила
+
+* Карточки в стиле стекла (glassmorphism).
+* Основная палитра — как в макете (синий/фиолетовый, прозрачности).
+* Шрифты: системные + жирный для заголовков.
+* Минимум элементов, упор на простоту.
+
+---
+
+## Макеты страниц в Figma
+https://www.figma.com/design/zhUVBf3QpAzTyFHAgtoKef/Risky-Business?node-id=0-1&t=ulqgufKyeQyY62d5-1
+
+---
