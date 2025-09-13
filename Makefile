@@ -25,30 +25,30 @@ help:
 # Установка зависимостей
 setup:
 	@echo "📦 Установка зависимостей..."
-	npm install
-	cd server && npm install
-	cd ../mobile && npm install
+	pnpm install
+	cd server && pnpm install
+	cd ../mobile && pnpm install
 	@echo "✅ Зависимости установлены"
 
 # Запуск в режиме разработки
 dev:
 	@echo "🚀 Запуск в режиме разработки..."
-	npm run dev
+	pnpm run dev
 
 # Запуск мобильного приложения
 dev-mobile:
 	@echo "📱 Запуск мобильного приложения..."
-	cd mobile && npm start
+	cd mobile && pnpm start
 
 # Запуск сервера
 dev-server:
 	@echo "🖥️ Запуск сервера..."
-	cd server && npm run dev
+	cd server && pnpm run dev
 
 # Сборка
 build:
 	@echo "🔨 Сборка проекта..."
-	npm run build
+	pnpm run build
 
 # Очистка
 clean:
@@ -80,8 +80,8 @@ docker-logs:
 # Настройка базы данных
 db-setup:
 	@echo "🗄️ Настройка базы данных..."
-	cd server && npm run db:generate
-	cd server && npm run db:push
+	cd server && pnpm run db:generate
+	cd server && pnpm run db:push
 	@echo "✅ База данных настроена"
 
 # Сброс базы данных
@@ -90,8 +90,8 @@ db-reset:
 	docker-compose down -v
 	docker-compose up -d postgres
 	sleep 10
-	cd server && npm run db:generate
-	cd server && npm run db:push
+	cd server && pnpm run db:generate
+	cd server && pnpm run db:push
 	@echo "✅ База данных сброшена"
 
 # Полная настройка проекта

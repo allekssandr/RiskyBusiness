@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Development override for server
   server-dev:
@@ -19,8 +17,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./server:/app
-      - /app/node_modules
+      - ./server/src:/app/src
+      - ./server/prisma:/app/prisma
+      - ./server/tsconfig.json:/app/tsconfig.json
+      - ./server/package.json:/app/package.json
     depends_on:
       postgres:
         condition: service_healthy
@@ -30,7 +30,6 @@ services:
         condition: service_healthy
     networks:
       - risky-business-network
-    command: npm run dev
 
   # PostgreSQL Database
   postgres:

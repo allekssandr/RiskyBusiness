@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import prisma from '@/config/database';
+import prisma from '../config/database';
 
 export const generateProfile = async (req: Request, res: Response, next: NextFunction) => {
   try {

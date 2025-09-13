@@ -1,7 +1,7 @@
-import { Router } from 'express';
-import { createGame, getGame, addPlayer, startGame, getNextTurn, submitTurn } from '@/controllers/gameController';
+import { Router, type Router as ExpressRouter } from 'express';
+import { createGame, getGame, addPlayer, startGame, getNextTurn, submitTurn } from '../controllers/gameController';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // POST /api/games - Create new game
 router.post('/', createGame);

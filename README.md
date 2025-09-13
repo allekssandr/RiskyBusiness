@@ -75,7 +75,7 @@ risky-business/
 - [Node.js](https://nodejs.org/) версии 18 или выше
 - [npm](https://www.npmjs.com/) 9+ или [Yarn](https://yarnpkg.com/) для управления зависимостями
 - [Docker](https://www.docker.com/) и [Docker Compose](https://docs.docker.com/compose/) для контейнеризации
-- [Expo CLI](https://docs.expo.dev/get-started/installation/) (`npm install -g @expo/cli`)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/) (`pnpm install -g @expo/cli`)
 
 ### 1. Клонирование репозитория
 
@@ -88,12 +88,12 @@ cd risky-business
 
 ```bash
 # Установка всех зависимостей (корень, mobile, server)
-npm run setup
+pnpm run setup
 
 # Или вручную:
-npm install
-cd mobile && npm install
-cd ../server && npm install
+pnpm install
+cd mobile && pnpm install
+cd ../server && pnpm install
 ```
 
 ### 3. Настройка окружения
@@ -120,8 +120,8 @@ docker-compose -f docker-compose.dev.yml up -d
 
 ```bash
 cd server
-npm run db:generate
-npm run db:push
+pnpm run db:generate
+pnpm run db:push
 ```
 
 ### 6. Запуск приложений
@@ -130,13 +130,13 @@ npm run db:push
 # В отдельных терминалах:
 
 # Backend (порт 3000)
-npm run dev:server
+pnpm run dev:server
 
 # Mobile (Expo)
-npm run dev:mobile
+pnpm run dev:mobile
 
 # Или запуск всего сразу
-npm run dev
+pnpm run dev
 ```
 
 ## 📱 Мобильное приложение
@@ -145,17 +145,17 @@ npm run dev
 
 ```bash
 cd mobile
-npm start
+pnpm start
 ```
 
 ### Сборка
 
 ```bash
 # Android
-npm run build:android
+pnpm run build:android
 
 # iOS
-npm run build:ios
+pnpm run build:ios
 ```
 
 ## 🖥️ Backend API
@@ -164,7 +164,7 @@ npm run build:ios
 
 ```bash
 cd server
-npm run dev
+pnpm run dev
 ```
 
 ### API Endpoints
@@ -181,13 +181,13 @@ npm run dev
 
 ```bash
 # Генерация Prisma клиента
-npm run db:generate
+pnpm run db:generate
 
 # Применение миграций
-npm run db:migrate
+pnpm run db:migrate
 
 # Prisma Studio (GUI для БД)
-npm run db:studio
+pnpm run db:studio
 ```
 
 ## 🐳 Docker
@@ -217,23 +217,23 @@ docker-compose down
 
 ```bash
 # Проверка кода
-npm run lint
+pnpm run lint
 
 # Автоисправление
-npm run lint:fix
+pnpm run lint:fix
 
 # Форматирование
-npm run format
+pnpm run format
 ```
 
 ### Тестирование
 
 ```bash
 # Запуск тестов
-npm run test
+pnpm run test
 
 # Тесты в watch режиме
-npm run test:watch
+pnpm run test:watch
 ```
 
 ## 📊 Мониторинг
@@ -242,13 +242,13 @@ npm run test:watch
 
 - Backend: `http://localhost:3000/health`
 - MinIO Console: `http://localhost:9001`
-- Prisma Studio: `http://localhost:5555` (после `npm run db:studio`)
+- Prisma Studio: `http://localhost:5555` (после `pnpm run db:studio`)
 
 ### Логи
 
 ```bash
 # Все сервисы
-npm run docker:logs
+pnpm run docker:logs
 
 # Конкретный сервис
 docker-compose logs -f postgres
@@ -302,7 +302,7 @@ GEMINI_API_KEY="your-gemini-api-key"
 
 ```bash
 # Сборка всех компонентов
-npm run build
+pnpm run build
 
 # Запуск в production
 docker-compose -f docker-compose.prod.yml up -d

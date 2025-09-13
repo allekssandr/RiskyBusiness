@@ -1,18 +1,18 @@
-import express from 'express';
+import express, { type Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
-import { errorHandler } from '@/middlewares/errorHandler';
-import { notFound } from '@/middlewares/notFound';
-import gameRoutes from '@/routes/gameRoutes';
-import playerRoutes from '@/routes/playerRoutes';
-import scenarioRoutes from '@/routes/scenarioRoutes';
+import { errorHandler } from './middlewares/errorHandler';
+import { notFound } from './middlewares/notFound';
+import gameRoutes from './routes/gameRoutes';
+import playerRoutes from './routes/playerRoutes';
+import scenarioRoutes from './routes/scenarioRoutes';
 
 dotenv.config();
 
-const app = express();
+const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware

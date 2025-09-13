@@ -1,7 +1,7 @@
-import { Router } from 'express';
-import { getScenarios, createScenario } from '@/controllers/scenarioController';
+import { Router, type Router as ExpressRouter } from 'express';
+import { getScenarios, createScenario } from '../controllers/scenarioController';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // GET /api/scenarios - Get all scenarios
 router.get('/', getScenarios);

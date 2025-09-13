@@ -70,6 +70,7 @@ model PlayerProfile {
 
   // Relations
   player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  generatedItems GeneratedItem[]
 
   @@map("player_profiles")
 }
