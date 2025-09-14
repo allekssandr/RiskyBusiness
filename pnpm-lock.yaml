@@ -47,6 +47,9 @@ importers:
 
   mobile:
     dependencies:
+      '@babel/helpers':
+        specifier: ^7.28.4
+        version: 7.28.4
       '@babel/runtime':
         specifier: ^7.28.4
         version: 7.28.4
