@@ -114,6 +114,9 @@ importers:
       '@babel/core':
         specifier: ^7.28.4
         version: 7.28.4
+      '@babel/plugin-transform-runtime':
+        specifier: ^7.28.3
+        version: 7.28.3(@babel/core@7.28.4)
       '@types/react':
         specifier: ~18.2.14
         version: 18.2.79
@@ -4528,6 +4531,7 @@ packages:
   metro-react-native-babel-preset@0.76.8:
     resolution: {integrity: sha512-Ptza08GgqzxEdK8apYsjTx2S8WDUlS2ilBlu9DR1CUcHmg4g3kOkFylZroogVAUKtpYQNYwAvdsjmrSdDNtiAg==}
     engines: {node: '>=16'}
+    deprecated: Use @react-native/babel-preset instead
     peerDependencies:
       '@babel/core': '*'
 
