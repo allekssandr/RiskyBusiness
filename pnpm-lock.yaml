@@ -47,6 +47,9 @@ importers:
 
   mobile:
     dependencies:
+      '@babel/runtime':
+        specifier: ^7.28.4
+        version: 7.28.4
       '@expo/vector-icons':
         specifier: ^13.0.0
         version: 13.0.0
@@ -109,7 +112,7 @@ importers:
         version: 3.25.76
     devDependencies:
       '@babel/core':
-        specifier: ^7.20.0
+        specifier: ^7.28.4
         version: 7.28.4
       '@types/react':
         specifier: ~18.2.14

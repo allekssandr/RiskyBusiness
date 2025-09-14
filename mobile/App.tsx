@@ -9,7 +9,14 @@ import AddPlayersScreen from './src/screens/AddPlayersScreen';
 import ScenarioSelectScreen from './src/screens/ScenarioSelectScreen';
 import GameScreen from './src/screens/GameScreen';
 
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  AddPlayers: undefined;
+  ScenarioSelect: undefined;
+  Game: { scenarioId: string };
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
 
 export default function App() {
