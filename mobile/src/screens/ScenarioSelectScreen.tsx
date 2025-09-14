@@ -3,13 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { StackNavigationProp } from '@react-navigation/stack';
-
-type RootStackParamList = {
-  Home: undefined;
-  AddPlayers: undefined;
-  ScenarioSelect: undefined;
-  Game: undefined;
-};
+import { RootStackParamList } from '../types/navigation';
 
 type ScenarioSelectScreenNavigationProp = StackNavigationProp<RootStackParamList, 'ScenarioSelect'>;
 
