@@ -8,7 +8,7 @@ type RootStackParamList = {
   Home: undefined;
   AddPlayers: undefined;
   ScenarioSelect: undefined;
-  Game: undefined;
+  Game: { scenarioId: string };
 };
 
 type ScenarioSelectScreenNavigationProp = StackNavigationProp<RootStackParamList, 'ScenarioSelect'>;
